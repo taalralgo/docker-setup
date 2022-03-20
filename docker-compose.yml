@@ -56,3 +56,16 @@ services:
       - UPLOAD_LIMIT=20M
     networks:
       - laravel
+
+  composer:
+    image: composer:latest
+    container_name: composer
+    command: ["composer", "install"]
+    volumes:
+      - ./:/var/www/html
+    working_dir: /var/www/html
+    links:
+      - fpm
+    restart: on-failure
+    networks:
+      - laravel
